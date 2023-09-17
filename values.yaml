@@ -1,0 +1,60 @@
+# values.yaml
+serviceMappings:
+  - serviceName: wordpress
+    paths:
+      - path: /wp-admin
+        pathType: Prefix
+    resources:
+      requests:
+        memory: "64Mi"
+        cpu: "250m"
+      limits:
+        memory: "128Mi"
+        cpu: "500m"
+  - serviceName: microweber
+    paths:
+      - path: /admin/view:modules/load_module:users/edit-user:2
+        pathType: Prefix
+      - path: /api/save_option
+        pathType: Prefix
+      - path: /api/users/search_authors
+        pathType: Prefix
+  # Add more service mappings as needed
+services:
+  - name: wordpress
+    replicaCount: 1
+    image:
+      repository: 106832631040.dkr.ecr.us-east-2.amazonaws.com/wordpress
+      pullPolicy: Always
+      tag: latest
+    port: 80
+    targetPort: 3000
+    resources:
+      requests:
+        memory: "64Mi"
+        cpu: "250m"
+      limits:
+        memory: "128Mi"
+        cpu: "500m"
+  - name: microweber
+    replicaCount: 1
+    image:
+      repository: 106832631040.dkr.ecr.us-east-2.amazonaws.com/microweber
+      pullPolicy: Always
+      tag: latest
+    port: 80
+    targetPort: 3001
+    resources:
+      requests:
+        memory: "64Mi"
+        cpu: "250m"
+      limits:
+        memory: "128Mi"
+        cpu: "500m"
+  # Add more services as needed
+ingress:
+  enabled: true
+  className: nginx
+  annotations:
+    # Add any desired annotations here
+  tls: []
