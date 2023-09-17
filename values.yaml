@@ -24,7 +24,7 @@ services:
   - name: wordpress
     replicaCount: 1
     image:
-      repository: 106832631040.dkr.ecr.us-east-2.amazonaws.com/wordpress
+      repository: <repo_url>/wordpress
       pullPolicy: Always
       tag: latest
     port: 80
@@ -39,7 +39,7 @@ services:
   - name: microweber
     replicaCount: 1
     image:
-      repository: 106832631040.dkr.ecr.us-east-2.amazonaws.com/microweber
+      repository: <repo_url>/microweber
       pullPolicy: Always
       tag: latest
     port: 80
