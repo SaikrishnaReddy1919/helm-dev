@@ -4,6 +4,8 @@ serviceMappings:
     paths:
       - path: /wp-admin
         pathType: Prefix
+      - path: /wp-content
+        pathType: Prefix
     resources:
       requests:
         memory: "64Mi"
@@ -14,17 +16,17 @@ serviceMappings:
   - serviceName: microweber
     paths:
       - path: /admin/view:modules/load_module:users/edit-user:2
-        pathType: Prefix
+        pathType: Exact
       - path: /api/save_option
-        pathType: Prefix
+        pathType: Exact
       - path: /api/users/search_authors
-        pathType: Prefix
+        pathType: Exact
   # Add more service mappings as needed
 services:
   - name: wordpress
     replicaCount: 1
     image:
-      repository: <repo_url>/wordpress
+      repository: 106832631040.dkr.ecr.us-east-2.amazonaws.com/wordpress
       pullPolicy: Always
       tag: latest
     port: 80
@@ -39,7 +41,7 @@ services:
   - name: microweber
     replicaCount: 1
     image:
-      repository: <repo_url>/microweber
+      repository: 106832631040.dkr.ecr.us-east-2.amazonaws.com/microweber
       pullPolicy: Always
       tag: latest
     port: 80

@@ -12,7 +12,7 @@ spec:
           {{- $serviceName := .serviceName }}
           {{- range .paths }}
           - path: {{ .path }} # Use the path from the current iteration
-            pathType: Prefix
+            pathType: {{ .pathType }}
             backend:
               service:
                 name: {{ printf "%s-service" $serviceName }} # Use the serviceName
